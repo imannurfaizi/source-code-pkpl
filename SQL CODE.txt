@@ -1,0 +1,33 @@
+CREATE DATABASE barbershop;
+
+USE barbershop;
+
+CREATE TABLE `cabang` (
+  `id_cabang` int(11) NOT NULL AUTO_INCREMENT,
+  `nm_cabang` varchar(50) NOT NULL,
+  `jam_op` varchar(50) NOT NULL,
+  `no_telp` varchar(13) NOT NULL,
+  `alamat` text NOT NULL,
+  PRIMARY KEY (`id_cabang`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `model` (
+  `id_model` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_model` varchar(50) NOT NULL,
+  `tarif` int(11) NOT NULL,
+  `img_model` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_model`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `transaksi` (
+  `id_transaksi` int(11) NOT NULL AUTO_INCREMENT,
+  `tgl` date NOT NULL,
+  `id_model` int(11) NOT NULL,
+  `id_cabang` int(11) NOT NULL,
+  PRIMARY KEY (`id_transaksi`),
+  KEY `id_model` (`id_model`),
+  KEY `id_cabang` (`id_cabang`),
+  CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_cabang`) REFERENCES `cabang` (`id_cabang`),
+  CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_model`) REFERENCES `model` (`id_model`)
+) ENGINE=InnoDB;
+
